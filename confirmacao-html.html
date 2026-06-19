@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirmação de Presença | Treinamento Posicionamento Feminino</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --roxo: #6B2FA0;
+    --roxo-claro: #9B59B6;
+    --lilas: #C89FE0;
+    --lilas-bg: #F0E6FA;
+    --branco: #FFFFFF;
+    --cinza: #6B7280;
+    --cinza-claro: #F9F5FF;
+    --texto: #1A1A2E;
+    --verde: #27AE60;
+    --wpp: #25D366;
+    --wpp-dark: #128C7E;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    background: linear-gradient(145deg, #F5EDFC 0%, #EDE0F8 50%, #F9F5FF 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 16px 40px;
+    color: var(--texto);
+  }
+
+  .wrapper {
+    width: 100%;
+    max-width: 480px;
+    background: var(--branco);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(107,47,160,0.18);
+  }
+
+  /* BANNER */
+  .banner-img-wrap {
+    width: 100%;
+    line-height: 0;
+  }
+  .banner-img-wrap img {
+    width: 100%;
+    display: block;
+    max-height: 220px;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  /* CARD */
+  .card { padding: 28px 24px 32px; }
+
+  /* SCREENS */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* TELA 1 */
+  .screen-icon {
+    width: 56px; height: 56px;
+    background: var(--lilas-bg);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 16px;
+  }
+  .screen-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--roxo);
+    margin-bottom: 8px;
+  }
+  .screen-sub {
+    font-size: 14px;
+    color: var(--cinza);
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .btn-present {
+    background: linear-gradient(135deg, #8B2FC9, #6B2FA0);
+    color: var(--branco);
+    border: none;
+    border-radius: 12px;
+    padding: 15px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 16px rgba(107,47,160,0.30);
+  }
+  .btn-present:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(107,47,160,0.40); }
+  .btn-absent {
+    background: transparent;
+    color: var(--cinza);
+    border: 1.5px solid #D1D5DB;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .btn-absent:hover { border-color: var(--roxo-claro); color: var(--roxo-claro); }
+
+  /* TELA 2 */
+  .input-group { margin-bottom: 18px; }
+  .input-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--roxo);
+    margin-bottom: 8px;
+  }
+  .input-group input {
+    width: 100%;
+    border: 1.5px solid #E5D4F5;
+    border-radius: 10px;
+    padding: 13px 15px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    color: var(--texto);
+    background: var(--cinza-claro);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .input-group input:focus {
+    border-color: var(--roxo-claro);
+    box-shadow: 0 0 0 3px rgba(155,89,182,0.12);
+    background: var(--branco);
+  }
+  .btn-submit {
+    width: 100%;
+    background: linear-gradient(135deg, #8B2FC9, #6B2FA0);
+    color: var(--branco);
+    border: none;
+    border-radius: 12px;
+    padding: 15px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 16px rgba(107,47,160,0.30);
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(107,47,160,0.40); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+  /* TELA 3 */
+  .success-icon {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, #27AE60, #1E8449);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 16px;
+    box-shadow: 0 4px 16px rgba(39,174,96,0.30);
+  }
+  .success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--verde);
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .success-name {
+    font-size: 14px;
+    color: var(--cinza);
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  /* ZOOM BOX */
+  .zoom-box {
+    background: linear-gradient(135deg, #F5EDFC, #EDE0F8);
+    border: 1.5px solid var(--lilas);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .zoom-box-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--roxo);
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .zoom-link-display {
+    background: var(--branco);
+    border: 1.5px solid #D4A8F0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 12px;
+    color: var(--roxo);
+    word-break: break-all;
+    margin-bottom: 10px;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .btn-copy {
+    width: 100%;
+    background: var(--roxo);
+    color: var(--branco);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-copy:hover { background: #5A2585; transform: translateY(-1px); }
+  .btn-copy.copied { background: var(--verde); }
+
+  /* AVISO SALVAR LINK */
+  .aviso-zoom {
+    background: #F0FDF4;
+    border: 1.5px solid #86EFAC;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: #166534;
+    line-height: 1.6;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .aviso-zoom .aviso-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* BLOCO WHATSAPP */
+  .wpp-box {
+    background: linear-gradient(135deg, #e8fdf0, #d4f7e3);
+    border: 2px solid var(--wpp);
+    border-radius: 14px;
+    padding: 18px 16px;
+    margin-bottom: 16px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(37,211,102,0.18);
+  }
+  .wpp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--wpp);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    padding: 4px 12px;
+    margin-bottom: 12px;
+  }
+  .wpp-titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0a5c38;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .wpp-desc {
+    font-size: 14px;
+    color: #166534;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .wpp-desc strong {
+    color: #0a5c38;
+  }
+  .btn-wpp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #25D366, #20b558);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 12px;
+    padding: 14px 22px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    box-shadow: 0 4px 14px rgba(37,211,102,0.40);
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-wpp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37,211,102,0.50);
+  }
+  .wpp-logo {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+  }
+
+  .alterar-wrap {
+    text-align: center;
+    margin-top: 4px;
+  }
+  .btn-alterar {
+    background: none;
+    border: none;
+    color: #B0B0B0;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    text-decoration: underline;
+    padding: 4px 8px;
+    transition: color 0.2s;
+  }
+  .btn-alterar:hover { color: var(--cinza); }
+
+  /* TELA AUSENTE */
+  .absent-icon {
+    width: 56px; height: 56px;
+    background: #FEF2F2;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 16px;
+  }
+  .absent-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--texto);
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .absent-msg {
+    font-size: 14px;
+    color: var(--cinza);
+    text-align: center;
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+  .divider {
+    border: none;
+    border-top: 1.5px solid #F0E6FA;
+    margin: 20px 0;
+  }
+  .refazer-label {
+    font-size: 14px;
+    color: var(--cinza);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .btn-refazer {
+    width: 100%;
+    background: transparent;
+    color: var(--roxo);
+    border: 2px solid var(--roxo);
+    border-radius: 12px;
+    padding: 13px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: background 0.2s;
+  }
+  .btn-refazer:hover { background: var(--lilas-bg); }
+
+  /* SPINNER */
+  .spinner {
+    width: 16px; height: 16px;
+    border: 2.5px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: none;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <!-- BANNER -->
+  <div class="banner-img-wrap">
+    <img src="SUBSTITUA_PELA_URL_DA_IMAGEM" alt="Treinamento Posicionamento Feminino — 20 de Junho 17h">
+  </div>
+
+  <!-- CARD -->
+  <div class="card">
+
+    <!-- TELA 1 -->
+    <div class="screen active" id="screen-1">
+      <div class="screen-icon">🎓</div>
+      <h1 class="screen-title">Você vai estar presente?</h1>
+      <p class="screen-sub">Treinamento Posicionamento Feminino<br><strong>20 de junho às 17h — Ao vivo e gratuito</strong></p>
+      <div class="btn-group">
+        <button class="btn-present" onclick="goToName()">✅ Sim, vou estar presente!</button>
+        <button class="btn-absent" onclick="goToAbsent()">😔 Infelizmente não poderei participar</button>
+      </div>
+    </div>
+
+    <!-- TELA 2 -->
+    <div class="screen" id="screen-2">
+      <div class="screen-icon">✍️</div>
+      <h1 class="screen-title">Que bom! Como você se chama?</h1>
+      <p class="screen-sub">Para confirmarmos sua presença, precisamos do seu nome.</p>
+      <div class="input-group">
+        <label for="inputNome">Seu nome completo</label>
+        <input type="text" id="inputNome" placeholder="Digite seu nome..." autocomplete="name" />
+      </div>
+      <button class="btn-submit" id="btnConfirmar" onclick="confirmarPresenca()">
+        <span class="spinner" id="spinner"></span>
+        <span id="btnText">Confirmar minha presença 🎉</span>
+      </button>
+    </div>
+
+    <!-- TELA 3 -->
+    <div class="screen" id="screen-3">
+      <div class="success-icon">✅</div>
+      <h1 class="success-title">Presença confirmada!</h1>
+      <p class="success-name" id="successName">Estamos te esperando no dia 20 de junho às 17h.</p>
+
+      <div class="zoom-box">
+        <div class="zoom-box-label">🎥 Link do Zoom</div>
+        <div class="zoom-link-display">
+          https://us02web.zoom.us/j/89564079257?pwd=sbkQl3cCQYiDqlfb9z7TeCCAKYSAiW.1
+        </div>
+        <button class="btn-copy" id="btnCopy" onclick="copiarLink()">📋 Copiar link do Zoom</button>
+      </div>
+
+      <div class="aviso-zoom">
+        <span class="aviso-icon">💡</span>
+        <span>Salve este link! Você pode voltar a esta página a qualquer momento para copiá-lo novamente.</span>
+      </div>
+
+      <!-- BLOCO WHATSAPP -->
+      <div class="wpp-box">
+        <div class="wpp-badge">
+          <svg class="wpp-logo" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="24" fill="#25D366"/>
+            <path d="M34.5 13.4C32.1 11 28.9 9.6 25.5 9.6C18.5 9.6 12.8 15.3 12.8 22.3C12.8 24.6 13.4 26.8 14.5 28.7L12.7 35.4L19.6 33.6C21.4 34.6 23.4 35.1 25.5 35.1C32.5 35.1 38.2 29.4 38.2 22.4C38.2 19 36.9 15.8 34.5 13.4ZM25.5 33C23.6 33 21.7 32.5 20.1 31.6L19.7 31.4L15.7 32.4L16.7 28.5L16.5 28.1C15.5 26.4 14.9 24.4 14.9 22.3C14.9 16.5 19.7 11.7 25.5 11.7C28.3 11.7 31 12.8 33 14.8C35 16.8 36.1 19.5 36.1 22.3C36.1 28.2 31.3 33 25.5 33ZM31.3 25C31 24.9 29.4 24.1 29.2 24C28.9 23.9 28.7 23.9 28.6 24.2C28.4 24.5 27.8 25.2 27.6 25.4C27.5 25.6 27.3 25.6 27 25.5C25.7 24.9 24.8 24.4 23.8 22.9C23.5 22.4 24.1 22.4 24.6 21.4C24.7 21.2 24.6 21 24.5 20.9C24.4 20.8 23.8 19.2 23.5 18.5C23.3 17.8 23 17.9 22.8 17.9H22.2C22 17.9 21.7 18 21.4 18.3C21.2 18.6 20.4 19.4 20.4 21C20.4 22.6 21.5 24.2 21.6 24.4C21.8 24.6 23.7 27.6 26.7 29C28.7 29.9 29.5 30 30.5 29.8C31.1 29.7 32.3 29 32.6 28.2C32.9 27.4 32.9 26.7 32.8 26.6C32.7 26.3 31.6 25.2 31.3 25Z" fill="white"/>
+          </svg>
+          Grupo Exclusivo
+        </div>
+        <div class="wpp-titulo">Treinamento Posicionamento Feminino</div>
+        <div class="wpp-desc">
+          Entre no grupo para receber <strong>avisos em tempo real</strong>, a <strong>apostila do treinamento</strong> e o acesso ao seu <strong>certificado</strong>.
+        </div>
+        <a href="https://chat.whatsapp.com/GbQpoRwodxoDH9ZkhqOeUE" target="_blank" class="btn-wpp">
+          <svg width="22" height="22" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M34.5 13.4C32.1 11 28.9 9.6 25.5 9.6C18.5 9.6 12.8 15.3 12.8 22.3C12.8 24.6 13.4 26.8 14.5 28.7L12.7 35.4L19.6 33.6C21.4 34.6 23.4 35.1 25.5 35.1C32.5 35.1 38.2 29.4 38.2 22.4C38.2 19 36.9 15.8 34.5 13.4ZM25.5 33C23.6 33 21.7 32.5 20.1 31.6L19.7 31.4L15.7 32.4L16.7 28.5L16.5 28.1C15.5 26.4 14.9 24.4 14.9 22.3C14.9 16.5 19.7 11.7 25.5 11.7C28.3 11.7 31 12.8 33 14.8C35 16.8 36.1 19.5 36.1 22.3C36.1 28.2 31.3 33 25.5 33ZM31.3 25C31 24.9 29.4 24.1 29.2 24C28.9 23.9 28.7 23.9 28.6 24.2C28.4 24.5 27.8 25.2 27.6 25.4C27.5 25.6 27.3 25.6 27 25.5C25.7 24.9 24.8 24.4 23.8 22.9C23.5 22.4 24.1 22.4 24.6 21.4C24.7 21.2 24.6 21 24.5 20.9C24.4 20.8 23.8 19.2 23.5 18.5C23.3 17.8 23 17.9 22.8 17.9H22.2C22 17.9 21.7 18 21.4 18.3C21.2 18.6 20.4 19.4 20.4 21C20.4 22.6 21.5 24.2 21.6 24.4C21.8 24.6 23.7 27.6 26.7 29C28.7 29.9 29.5 30 30.5 29.8C31.1 29.7 32.3 29 32.6 28.2C32.9 27.4 32.9 26.7 32.8 26.6C32.7 26.3 31.6 25.2 31.3 25Z" fill="white"/>
+          </svg>
+          Entrar no grupo agora
+        </a>
+      </div>
+
+      <div class="alterar-wrap">
+        <button class="btn-alterar" onclick="alterarResposta()">Alterar resposta</button>
+      </div>
+    </div>
+
+    <!-- TELA AUSENTE -->
+    <div class="screen" id="screen-absent">
+      <div class="absent-icon">💜</div>
+      <h1 class="absent-title">Tudo bem, entendemos!</h1>
+      <p class="absent-msg">Sentiremos sua falta no treinamento.<br><br>Fique de olho nas nossas redes — em breve traremos mais novidades! 🌸</p>
+      <hr class="divider">
+      <p class="refazer-label">Mudou de ideia?</p>
+      <button class="btn-refazer" onclick="resetar()">🔄 Quero confirmar minha presença</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const ZOOM_LINK = "https://us02web.zoom.us/j/89564079257?pwd=sbkQl3cCQYiDqlfb9z7TeCCAKYSAiW.1";
+  const SHEETS_URL = "https://script.google.com/macros/s/AKfycbxX5BQ-KvgEZSzcKvepKo93dUZTJ9klRnbrIP1X5Wwbn3yQRYlegu9uLuss1vIM8EN2iQ/exec";
+
+  function showScreen(id) {
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const salvo = localStorage.getItem("posicionamento_confirmada");
+    if (salvo) {
+      const dados = JSON.parse(salvo);
+      mostrarTela3(dados.nome);
+    }
+    document.getElementById("inputNome").addEventListener("keydown", e => {
+      if (e.key === "Enter") confirmarPresenca();
+    });
+  });
+
+  function goToName() {
+    showScreen("screen-2");
+    setTimeout(() => document.getElementById("inputNome").focus(), 100);
+  }
+
+  function goToAbsent() { showScreen("screen-absent"); }
+
+  function mostrarTela3(nome) {
+    if (nome) {
+      document.getElementById("successName").textContent =
+        nome + ", estamos te esperando no dia 20 de junho às 17h! 🎉";
+    }
+    showScreen("screen-3");
+  }
+
+  async function confirmarPresenca() {
+    const nome = document.getElementById("inputNome").value.trim();
+    if (!nome) {
+      const inp = document.getElementById("inputNome");
+      inp.focus();
+      inp.style.borderColor = "#E74C3C";
+      setTimeout(() => inp.style.borderColor = "", 1500);
+      return;
+    }
+
+    const btn     = document.getElementById("btnConfirmar");
+    const spinner = document.getElementById("spinner");
+    const btnText = document.getElementById("btnText");
+
+    btn.disabled = true;
+    spinner.style.display = "block";
+    btnText.textContent = "Confirmando...";
+
+    const timestamp = new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+
+    const url = new URL(SHEETS_URL);
+    url.searchParams.set("nome", nome);
+    url.searchParams.set("status", "presente");
+    url.searchParams.set("timestamp", timestamp);
+
+    try {
+      await fetch(url.toString(), { method: "GET", mode: "no-cors" });
+    } catch (e) {}
+
+    localStorage.setItem("posicionamento_confirmada", JSON.stringify({ nome }));
+
+    btn.disabled = false;
+    spinner.style.display = "none";
+    btnText.textContent = "Confirmar minha presença 🎉";
+
+    mostrarTela3(nome);
+  }
+
+  function copiarLink() {
+    navigator.clipboard.writeText(ZOOM_LINK).then(marcarCopiado).catch(() => {
+      const el = document.createElement("textarea");
+      el.value = ZOOM_LINK;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+      marcarCopiado();
+    });
+  }
+
+  function marcarCopiado() {
+    const btn = document.getElementById("btnCopy");
+    btn.classList.add("copied");
+    btn.textContent = "✅ Link copiado!";
+    setTimeout(() => {
+      btn.classList.remove("copied");
+      btn.textContent = "📋 Copiar link do Zoom";
+    }, 2500);
+  }
+
+  function alterarResposta() {
+    localStorage.removeItem("posicionamento_confirmada");
+    document.getElementById("inputNome").value = "";
+    showScreen("screen-1");
+  }
+
+  function resetar() {
+    document.getElementById("inputNome").value = "";
+    showScreen("screen-1");
+  }
+</script>
+</body>
+</html>
